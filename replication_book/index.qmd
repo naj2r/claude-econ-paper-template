@@ -1,0 +1,12 @@
+# Preface {.unnumbered}
+
+This is the replication pipeline documentation for **{{Paper Title}}**.
+
+## How to Use This Book
+
+- **Data Construction** (Ch. 10–40): Raw data → cleaned panels
+- **Variable Construction** (Ch. 50–70): Panel variables, outcome definitions, scaling
+- **Analysis** (Ch. 75–90): Empirical strategy, regressions, verification
+- **Paper Development** (Ch. 85–88): Literature, drafts linked to Overleaf sections
+- **Backmatter** (Ch. 91–95): Change log, decisions, problems, verification evidence, session history
+- **Appendix**: Variable dictionary, build notes

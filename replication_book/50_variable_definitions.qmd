@@ -1,0 +1,19 @@
+# Variable Definitions
+
+## Treatment Variables
+
+| Variable | Definition | Source |
+|----------|-----------|--------|
+| {{treatment_var}} | {{description}} | {{data source}} |
+
+## Outcome Variables
+
+| Variable | Definition | Unit | Source |
+|----------|-----------|------|--------|
+| {{outcome_var}} | {{description}} | {{unit}} | {{data source}} |
+
+## Control Variables
+
+| Variable | Definition | Rationale |
+|----------|-----------|-----------|
+| {{control_var}} | {{description}} | {{why included}} |

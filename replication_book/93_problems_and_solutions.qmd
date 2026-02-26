@@ -1,0 +1,19 @@
+# Problems & Solutions {#sec-problems}
+
+This chapter documents issues encountered during analysis and how they were resolved.
+
+---
+
+## Template
+
+```
+### P[N]: Short Description
+
+| Field | Detail |
+|-------|--------|
+| **Problem** | {{what went wrong}} |
+| **Impact** | {{how it affected the analysis}} |
+| **Root cause** | {{why it happened}} |
+| **Solution** | {{how it was fixed}} |
+| **Verification** | {{how we confirmed the fix}} |
+```

@@ -1,0 +1,11 @@
+# Raw Data Inventory
+
+## Data Sources
+
+| Source | File(s) | Format | Rows | Description |
+|--------|---------|--------|------|-------------|
+| {{Source 1}} | `data_raw/{{file}}` | {{CSV/DTA/JSON}} | {{N}} | {{description}} |
+
+## Data Dictionary
+
+See @sec-variable-dictionary for the full variable dictionary.

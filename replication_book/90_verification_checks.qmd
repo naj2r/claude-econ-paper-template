@@ -1,0 +1,15 @@
+# Verification Checks {#sec-verification-checks}
+
+## Cross-Language Verification
+
+{{If using Stata + R, document cross-language checks here.}}
+
+## Coefficient Verification
+
+| Table | Column | Stata β | R β | Match? |
+|-------|--------|---------|-----|--------|
+
+## Sample Size Verification
+
+| Panel | Expected N | Actual N | Match? |
+|-------|-----------|---------|--------|

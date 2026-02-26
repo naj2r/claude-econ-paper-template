@@ -1,0 +1,18 @@
+# Change Log
+
+This chapter tracks all substantive changes to the analysis pipeline.
+
+---
+
+## Template for New Entries
+
+```
+### YYYY-MM-DD — Short Description
+
+| Field | Detail |
+|-------|--------|
+| **Category** | Data / Code / Specification / Table / Documentation |
+| **Change** | What was modified |
+| **Rationale** | Why |
+| **Impact** | Effect on results |
+```

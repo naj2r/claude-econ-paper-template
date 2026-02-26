@@ -1,0 +1,39 @@
+# Quarto build output
+_book/
+_freeze/
+.quarto/
+
+# Data (too large for git — kept in Dropbox)
+data_raw/
+data_final/
+output/
+
+# Stata logs and temp files
+*.log
+*.smcl
+
+# R
+.Rhistory
+.RData
+.Rproj.user/
+
+# LaTeX
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.toc
+*.out
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Dropbox conflict files
+*conflicted*
+
+# Session temp files
+quality_reports/session_logs/.last_log_timestamp

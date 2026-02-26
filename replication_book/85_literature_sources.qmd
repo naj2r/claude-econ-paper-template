@@ -1,0 +1,33 @@
+# Literature Sources & Theoretical Framework
+
+## Study Context
+
+{{Brief summary of your study: question, data, method, key finding.}}
+
+## Source Material Inventory
+
+{{Paper-by-paper summaries of key references.}}
+
+## Thematic Literature Synthesis
+
+### I. {{First Theme}}
+
+### II. {{Second Theme}}
+
+### III. {{Third Theme}}
+
+## Theory-to-Empirics Linkage
+
+| # | Finding | Effect | Sig. | Theory | Source | Status |
+|---|---------|--------|------|--------|--------|--------|
+| 1 | {{finding}} | {{+/-/null}} | {{p}} | {{prediction}} | {{cite}} | {{Confirmed/Novel}} |
+
+## Paper Outline
+
+### Working Title
+
+"{{Full Paper Title}}"
+
+### Draft Abstract
+
+{{~150 words}}

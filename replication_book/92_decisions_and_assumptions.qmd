@@ -1,0 +1,29 @@
+# Decisions & Assumptions {#sec-decisions}
+
+This chapter documents analytical choices and their justifications.
+
+---
+
+## Data Decisions
+
+### D1: {{First Data Decision}}
+
+| Field | Detail |
+|-------|--------|
+| **Decision** | {{what was decided}} |
+| **Reason** | {{why}} |
+| **Alternatives** | {{what was considered and rejected}} |
+| **Sensitivity** | {{how sensitive are results to this choice}} |
+
+---
+
+## Specification Decisions
+
+### S1: {{First Specification Decision}}
+
+| Field | Detail |
+|-------|--------|
+| **Decision** | {{what was decided}} |
+| **Reason** | {{why}} |
+| **Alternatives** | {{what was considered}} |
+| **Sensitivity** | {{robustness check results}} |

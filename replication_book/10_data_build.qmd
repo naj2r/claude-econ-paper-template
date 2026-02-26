@@ -1,0 +1,17 @@
+# Data Build
+
+## Overview
+
+This chapter documents the primary data construction pipeline.
+
+## Build Script
+
+```
+code/{{01_data_build.do or 01_data_build.R}}
+```
+
+## Input → Output
+
+| Input | Output | Transformation |
+|-------|--------|----------------|
+| `data_raw/{{source}}` | `data_final/{{panel}}` | {{description}} |

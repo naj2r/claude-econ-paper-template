@@ -1,0 +1,15 @@
+# Verification Evidence
+
+This chapter provides evidence that the analysis pipeline produces correct, reproducible results.
+
+## Cross-Language Checks
+
+{{Document Stata vs. R comparisons if applicable.}}
+
+## Table Spot-Checks
+
+{{Document manual verification of published table values against regression output.}}
+
+## Data Integrity
+
+{{Document row counts, merge diagnostics, missing value patterns.}}

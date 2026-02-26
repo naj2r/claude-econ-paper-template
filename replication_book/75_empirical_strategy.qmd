@@ -1,0 +1,36 @@
+# Empirical Strategy {#sec-empirical-strategy}
+
+This chapter formalizes the estimation framework.
+
+## 1. Baseline Model
+
+$$
+Y_{ut} = \beta \cdot D_{ut} + \alpha_u + \gamma_t + \varepsilon_{ut},
+$$ {#eq-twfe-base}
+
+where:
+
+- $D_{ut}$ is the treatment indicator,
+- $\alpha_u$ are unit fixed effects,
+- $\gamma_t$ are year fixed effects,
+- standard errors are clustered at {{cluster level}}.
+
+## 2. Identification
+
+{{Describe what variation identifies beta, what FE absorb, key assumptions.}}
+
+## 3. Treatment Definitions
+
+| Tier | Variable | Definition |
+|------|----------|-----------|
+| T1 | {{var}} | {{definition}} |
+
+## 4. Sample Restrictions
+
+{{Document any sample restrictions, exclusions, robustness samples.}}
+
+## 5. Implementation Notes
+
+| Panel type | `absorb()` | `vce()` |
+|-----------|-----------|---------|
+| {{Unit}} panel | `absorb({{unit_id}} year)` | `vce(cluster {{cluster_id}})` |

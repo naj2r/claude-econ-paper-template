@@ -1,0 +1,105 @@
+project:
+  type: book
+  output-dir: _book
+
+book:
+  title: "{{PROJECT TITLE}} — Replication Pipeline"
+  author: "{{AUTHOR}}"
+  date: today
+  chapters:
+    - index.qmd
+    - replication_book/01_environment.qmd
+    - replication_book/02_raw_data_inventory.qmd
+    - part: "Data Construction"
+      chapters:
+        - replication_book/10_data_build.qmd
+        # Add more data build chapters as needed (20_, 30_, 40_)
+    - part: "Variable Construction"
+      chapters:
+        - replication_book/50_variable_definitions.qmd
+        # Add more variable chapters as needed (60_, 70_)
+    - part: "Analysis"
+      chapters:
+        - replication_book/75_empirical_strategy.qmd
+        - replication_book/80_regressions.qmd
+        - replication_book/90_verification_checks.qmd
+    - part: "Paper Development"
+      chapters:
+        - replication_book/85_literature_sources.qmd
+        # Uncomment as sections are drafted:
+        # - replication_book/86_data_section.qmd
+        # - replication_book/87_results_section.qmd
+        # - replication_book/88_discussion_conclusion.qmd
+    - part: "Backmatter — Audit Trail"
+      chapters:
+        - replication_book/91_change_log.qmd
+        - replication_book/92_decisions_and_assumptions.qmd
+        - replication_book/93_problems_and_solutions.qmd
+        - replication_book/94_verification_evidence.qmd
+        - replication_book/95_session_history.qmd
+    - part: "Appendix"
+      chapters:
+        - replication_book/appendix/variable_dictionary.qmd
+        - replication_book/appendix/build_notes.qmd
+
+execute:
+  freeze: auto
+  cache: true
+  error: true
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    code-fold: false
+    code-tools: true
+    code-copy: true
+    code-overflow: wrap
+    number-sections: true
+
+  # PDF format — uncomment to include in render, recomment for HTML-only iteration
+  # To render both: quarto render (no --to flag)
+  # To render PDF only: quarto render --to pdf
+  # pdf:
+  #   documentclass: scrreprt
+  #   pdf-engine: lualatex
+  #   keep-tex: true
+  #   number-sections: true
+  #   toc: true
+  #   papersize: letter
+  #   classoption:
+  #     - open=any
+  #   geometry:
+  #     - margin=1in
+  #   include-in-header:
+  #     text: |
+  #       % --- Code overflow prevention ---
+  #       \usepackage{fvextra}
+  #       \DefineVerbatimEnvironment{Highlighting}{Verbatim}{
+  #         breaklines,
+  #         breakanywhere=true,
+  #         commandchars=\\\{\}
+  #       }
+  #       % --- Table overflow prevention ---
+  #       \usepackage{longtable}
+  #       \usepackage{booktabs}
+  #       \usepackage{tabularx}
+  #       % --- Float placement control ---
+  #       \usepackage{float}
+  #       \floatplacement{figure}{H}
+  #       \floatplacement{table}{H}
+  #       % --- URL line breaking ---
+  #       \usepackage{xurl}
+  #       % --- Prevent widows/orphans ---
+  #       \widowpenalty=10000
+  #       \clubpenalty=10000
+  #       % --- Font with full Unicode support (lualatex) ---
+  #       \usepackage{fontspec}
+  #       \defaultfontfeatures{Ligatures=TeX}
+  #       % --- Underscore handling in text mode ---
+  #       \usepackage[strings]{underscore}
+  #       % --- Reduce overfull hbox warnings from code ---
+  #       \tolerance=1000
+  #       \emergencystretch=3em
+
+editor: visual

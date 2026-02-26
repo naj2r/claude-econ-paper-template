@@ -1,0 +1,17 @@
+# Build Notes {.appendix}
+
+## Build History
+
+| Date | Action | Notes |
+|------|--------|-------|
+| {{date}} | Initial scaffold created | {{notes}} |
+
+## Known Issues
+
+1. {{Issue 1}}
+
+## Software Notes
+
+- **Stata**: {{version notes, package requirements}}
+- **R**: {{version notes, package requirements}}
+- **Quarto**: {{version notes}}

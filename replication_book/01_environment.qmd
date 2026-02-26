@@ -1,0 +1,24 @@
+# Environment & Setup
+
+## Software Requirements
+
+| Software | Version | Purpose |
+|----------|---------|---------|
+| Stata MP | {{version}} | Primary estimation |
+| R | {{version}} | Secondary analysis, Quarto |
+| Quarto | {{version}} | Documentation book |
+| TeX Live | {{version}} | PDF compilation |
+
+## File Paths
+
+```
+$RB = {{path to this project root}}
+$OL = {{path to Overleaf project}}
+```
+
+## Reproduction Instructions
+
+1. Install software above
+2. Set paths in `code/paths.do` (Stata) or `scripts/config.R` (R)
+3. Run `code/master_build_all.do` to rebuild all data and results
+4. Run `quarto render` from `$RB/` to rebuild this book

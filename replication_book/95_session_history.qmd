@@ -1,0 +1,53 @@
+# Session History {#sec-sessions}
+
+This chapter maintains a running log of Claude Code analysis sessions.
+
+**For reviewers**: This provides a transparent audit trail of how the analysis evolved over time.
+
+---
+
+## How Sessions Are Logged
+
+Each session follows a standard format:
+
+1. **Goal**: What we set out to do
+2. **Completed**: What was actually accomplished
+3. **Decisions**: Any analytical or methodological choices made (cross-referenced to @sec-decisions)
+4. **Problems**: Issues encountered (cross-referenced to @sec-problems)
+5. **Files Modified**: Which files were created or changed
+6. **Next Steps**: What remains
+
+Sessions are numbered and dated. Detailed hourly logs are stored in `quality_reports/session_logs/`.
+
+---
+
+## Session Index
+
+| # | Date | Focus | Key Output |
+|---|------|-------|------------|
+
+---
+
+## Template for New Sessions
+
+```
+## Session [N]: [YYYY-MM-DD] — [Short Title]
+
+### Goal
+[What we set out to do]
+
+### Completed
+- [Task 1]
+
+### Decisions
+- [Decision] — see @sec-decisions [ID]
+
+### Problems
+- [Problem] — see @sec-problems [ID]
+
+### Files Modified
+- [file] — [what changed]
+
+### Next Steps
+- [ ] [Task for next session]
+```

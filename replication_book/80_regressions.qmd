@@ -1,0 +1,24 @@
+# Regressions & Table Generation {#sec-regressions}
+
+This chapter documents the estimation-to-table pipeline.
+
+## Architecture
+
+```
+code/{{07_regressions.do}}  →  output/results/regression_results.csv
+code/{{08_tables.do}}       →  $OL/files/tab/{{subfolder}}/*.tex
+```
+
+## Specification
+
+All regressions use a common TWFE specification (see @sec-empirical-strategy):
+
+```stata
+reghdfe outcome treatment [controls], absorb(unit_fe year) vce(cluster cluster_var)
+```
+
+## Tables
+
+| Table | File | Caption | Key Finding |
+|-------|------|---------|-------------|
+| 1 | `{{table1.tex}}` | {{caption}} | {{finding}} |

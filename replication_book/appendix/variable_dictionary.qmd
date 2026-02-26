@@ -1,0 +1,19 @@
+# Variable Dictionary {#sec-variable-dictionary .appendix}
+
+## Panel Variables
+
+| Variable | Type | Description | Source |
+|----------|------|-------------|--------|
+| {{var}} | {{numeric/string}} | {{description}} | {{source}} |
+
+## Treatment Variables
+
+| Variable | Type | Description | Construction |
+|----------|------|-------------|-------------|
+| {{var}} | binary | {{description}} | {{how constructed}} |
+
+## Outcome Variables
+
+| Variable | Type | Description | Unit |
+|----------|------|-------------|------|
+| {{var}} | {{type}} | {{description}} | {{unit}} |
