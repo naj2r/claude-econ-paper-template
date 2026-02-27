@@ -1,6 +1,6 @@
 # Claude Code Economics Paper Template
 
-A complete workflow template for writing empirical economics papers with [Claude Code](https://claude.ai/claude-code). Includes 26 AI agents, 34 skills, and a two-layer documentation architecture (Quarto internal + Overleaf external).
+A complete workflow template for writing empirical economics papers with [Claude Code](https://claude.ai/claude-code). Includes 28 AI agents, 36 skills, and a two-layer documentation architecture (Quarto internal + Overleaf external).
 
 ## What's Included
 
@@ -8,9 +8,9 @@ A complete workflow template for writing empirical economics papers with [Claude
 
 | Component | Count | Purpose |
 |-----------|-------|---------|
-| **Agents** | 26 | Narrow-scope reviewers: domain expertise, proofreading, code review, LaTeX audit, writing pipeline, etc. |
-| **Skills** | 34 | Invocable workflows: `/render-pdf`, `/review-paper`, `/mccloskey-prose-edit`, `/consolidate`, etc. |
-| **Rules** | 13 | Conventions: code style, quality gates, model assignment, manuscript protection, replication protocol |
+| **Agents** | 28 | Narrow-scope reviewers + 2 background automation agents (stenographer, codevolution) |
+| **Skills** | 36 | Invocable workflows: `/render-pdf`, `/review-paper`, `/mccloskey-prose-edit`, `/consolidate`, etc. |
+| **Rules** | 15 | Conventions: code style, quality gates, model assignment, manuscript protection, replication protocol |
 
 ### Quarto Replication Book (`replication_book/`)
 
@@ -166,7 +166,7 @@ Then paste:
 | `.claude/rules/overleaf-workflow.md` | Section writing status tracker |
 | `.claude/agents/domain-reviewer.md` | Study context for the domain expert reviewer |
 
-All 26 agents, 34 skills, and 13 rules reference these config files via variables (`$OL`, `$RB`, `study-parameters.md`) rather than hardcoded paths — so they work for any project without modification.
+All 28 agents, 36 skills, and 15 rules reference these config files via variables (`$OL`, `$RB`, `study-parameters.md`) rather than hardcoded paths — so they work for any project without modification.
 
 ### Quick Reference: Which Scenario Am I In?
 
@@ -194,9 +194,9 @@ Each project needs its own Overleaf project. The template doesn't create one for
 ```
 Your Paper/
 ├── .claude/                    # AI workflow infrastructure
-│   ├── agents/                 # 26 reviewer agents
-│   ├── skills/                 # 34 invocable skills
-│   └── rules/                  # 13 convention files
+│   ├── agents/                 # 28 agents (26 reviewers + 2 background automation)
+│   ├── skills/                 # 36 invocable skills
+│   └── rules/                  # 15 convention files
 ├── CLAUDE.md                   # Project config (paths, state, principles)
 ├── _quarto.yml                 # Quarto book config (HTML + PDF)
 ├── replication_book/           # Internal documentation chapters
@@ -250,7 +250,7 @@ These skills form a complete writing pipeline for taking a rough draft to public
 |-------|-------------|-------------|
 | `/own-writing-check` | Audit `.tex` changes — flag any edit the user didn't explicitly request | After any session touching Overleaf files |
 
-## All Agents (26)
+## All Agents (28)
 
 ### Review Agents (READ-ONLY critics)
 
@@ -288,13 +288,20 @@ These skills form a complete writing pipeline for taking a rough draft to public
 | `consolidator-fixer` | opus | Cherry-picks additions from source documents |
 | `verifier` | sonnet | End-to-end task completion verification |
 
+### Background Automation Agents (fire autonomously)
+
+| Agent | Model | What it does |
+|-------|-------|-------------|
+| `stenographer` | haiku | Raw action log after every TODO completion — files, commands, pass/fail |
+| `codevolution` | sonnet | Infrastructure sync — propagates new/updated agents, skills, rules to the template repo |
+
 ## Agent Model Assignment
 
 | Model | Used For | Cost |
 |-------|----------|------|
 | **Opus** | Domain review, economic interpretation, research ideation, consolidation | $$$ |
 | **Sonnet** | Code review, proofreading, table verification, LaTeX audit, prose editing | $$ |
-| **Haiku** | File search, citation lookup, session logging | $ |
+| **Haiku** | File search, citation lookup, session logging, stenographer | $ |
 
 See `.claude/rules/model-assignment.md` for the full decision matrix.
 
