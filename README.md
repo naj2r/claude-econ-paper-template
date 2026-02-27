@@ -1,6 +1,6 @@
 # Claude Code Economics Paper Template
 
-A complete workflow template for writing empirical economics papers with [Claude Code](https://claude.ai/claude-code). Includes 16 AI agents, 22 skills, and a two-layer documentation architecture (Quarto internal + Overleaf external).
+A complete workflow template for writing empirical economics papers with [Claude Code](https://claude.ai/claude-code). Includes 26 AI agents, 34 skills, and a two-layer documentation architecture (Quarto internal + Overleaf external).
 
 ## What's Included
 
@@ -8,9 +8,9 @@ A complete workflow template for writing empirical economics papers with [Claude
 
 | Component | Count | Purpose |
 |-----------|-------|---------|
-| **Agents** | 16 | Narrow-scope reviewers: domain expertise, proofreading, code review, LaTeX audit, etc. |
-| **Skills** | 22 | Invocable workflows: `/render-pdf`, `/review-paper`, `/validate-bib`, etc. |
-| **Rules** | 12 | Conventions: code style, quality gates, model assignment, replication protocol |
+| **Agents** | 26 | Narrow-scope reviewers: domain expertise, proofreading, code review, LaTeX audit, writing pipeline, etc. |
+| **Skills** | 34 | Invocable workflows: `/render-pdf`, `/review-paper`, `/mccloskey-prose-edit`, `/consolidate`, etc. |
+| **Rules** | 13 | Conventions: code style, quality gates, model assignment, manuscript protection, replication protocol |
 
 ### Quarto Replication Book (`replication_book/`)
 
@@ -102,6 +102,8 @@ Your Paper/
 
 ## Key Skills
 
+### Core Workflow
+
 | Skill | What it does |
 |-------|-------------|
 | `/render-pdf` | Compile Quarto book to PDF with LaTeX quality checks |
@@ -112,12 +114,79 @@ Your Paper/
 | `/session-log` | Timestamped hourly session logging (idle-aware) |
 | `/devils-advocate` | Generate tough referee questions |
 
+### Academic Writing Pipeline (8-stage, run in order)
+
+These skills form a complete writing pipeline for taking a rough draft to publication-ready prose. Each stage has a narrow focus and must run in sequence:
+
+| Stage | Skill | What it does | When to use |
+|-------|-------|-------------|-------------|
+| 1 | `/draft-slop-fixer` | Clean up stream-of-consciousness drafts — resolve `(CITE)` markers, reword copy-paste chunks, fill TODOs | First pass on any rough draft |
+| 2 | `/proofread` | Grammar, formatting, citation consistency, formal register | After slop is fixed |
+| 3 | `/review-paper` | Narrative flow, argumentative structure, "so what" clarity | After proofreading |
+| 4 | `/review-paper` | Domain expert review — econometric validity, overclaiming, literature accuracy | After narrative check |
+| 5 | `/consolidate` | Cherry-pick additions from co-author notes, earlier drafts, source docs. Adversarial: fixer proposes, critic evaluates (max 2 rounds) | When merging contributions |
+| 6 | `/mccloskey-prose-edit` | McCloskey *Economical Writing* audit — critic scores (100-point rubric), fixer suggests rewrites, critic re-grades | After content is final |
+| 7 | — (organizer agent) | Reorder paragraphs, fix section boundaries, split/merge paragraphs | After McCloskey pass |
+| 8 | — (compressor agents) | Score word count compliance against journal targets, compress if over | Final length check |
+
+### Literature Management
+
+| Skill | What it does | When to use |
+|-------|-------------|-------------|
+| `/split-pdf` | Download, split PDFs into 4-page chunks, deep-read with structured extraction | Reading any academic paper |
+| `/lit-filter` | Organize, critique inclusion value, filter redundancy across all paper notes | After all papers are read |
+| `/lit-synthesizer` | Rate papers by relevance, organize by subtopic, condense into narrative review | Building the lit review section |
+
+### Manuscript Protection
+
+| Skill | What it does | When to use |
+|-------|-------------|-------------|
+| `/own-writing-check` | Audit `.tex` changes — flag any edit the user didn't explicitly request | After any session touching Overleaf files |
+
+## All Agents (26)
+
+### Review Agents (READ-ONLY critics)
+
+| Agent | Model | What it checks |
+|-------|-------|---------------|
+| `domain-reviewer` | opus | Economic interpretation, identification, overclaiming |
+| `narrative-reviewer` | sonnet | Argumentative flow, transitions, "so what" clarity |
+| `proofreader` | sonnet | Grammar, register, citation format, capitalization |
+| `slide-auditor` | sonnet | Beamer layout, overflow, font consistency |
+| `r-reviewer` | sonnet | R code quality, reproducibility |
+| `stata-reviewer` | sonnet | Stata code conventions, clustering, file naming |
+| `table-auditor` | sonnet | Table formatting, number verification against CSV |
+| `tikz-reviewer` | sonnet | TikZ diagram quality |
+| `quarto-auditor` | sonnet | Quarto render, crossrefs, YAML |
+| `bib-checker` | haiku | Citation key cross-referencing |
+| `pdf-auditor` | sonnet | LaTeX log parsing, overflow, font issues |
+| `session-logger` | haiku | Session log summaries |
+| `manuscript-critic` | sonnet | Audits `.tex` edits against user requests |
+| `mccloskey-critic` | sonnet | McCloskey prose quality scoring (100-point rubric) |
+| `compressor-critic` | sonnet | Section word count compliance |
+| `consolidator-critic` | sonnet | Skeptical gatekeeper for proposed additions |
+| `lit-filter` | sonnet | Paper inclusion value, redundancy filtering |
+| `lit-synthesizer` | sonnet | Literature rating, subtopic organization |
+
+### Fixer Agents (READ-WRITE, cannot self-approve)
+
+| Agent | Model | What it fixes |
+|-------|-------|--------------|
+| `quarto-fixer` | sonnet | Applies quarto-auditor findings |
+| `bib-fixer` | sonnet | Applies bib-checker findings |
+| `pdf-fixer` | sonnet | Applies pdf-auditor findings |
+| `mccloskey-fixer` | sonnet | Generates prose revision suggestions |
+| `compressor-fixer` | sonnet | Compresses prose to meet word count targets |
+| `organizer` | sonnet | Reorders paragraphs, fixes section boundaries |
+| `consolidator-fixer` | opus | Cherry-picks additions from source documents |
+| `verifier` | sonnet | End-to-end task completion verification |
+
 ## Agent Model Assignment
 
 | Model | Used For | Cost |
 |-------|----------|------|
-| **Opus** | Domain review, economic interpretation, research ideation | $$$ |
-| **Sonnet** | Code review, proofreading, table verification, LaTeX audit | $$ |
+| **Opus** | Domain review, economic interpretation, research ideation, consolidation | $$$ |
+| **Sonnet** | Code review, proofreading, table verification, LaTeX audit, prose editing | $$ |
 | **Haiku** | File search, citation lookup, session logging | $ |
 
 See `.claude/rules/model-assignment.md` for the full decision matrix.
