@@ -1,0 +1,17 @@
+# Prose Revisions
+
+Workspace for McCloskey prose audit revisions and other writing improvements. The `/mccloskey-prose-edit` skill writes revision suggestions here; the user reviews and applies them to Overleaf.
+
+## Revision Log
+
+| Date | Section | Score | Violations | Status |
+|------|---------|-------|------------|--------|
+| {{date}} | {{section}} | {{score}}/100 | {{count}} cardinal + {{count}} major | Pending / Applied |
+
+## Pending Revisions
+
+{{McCloskey fixer output goes here — specific revision suggestions with before/after.}}
+
+## Applied Revisions
+
+{{Move entries here after applying to Overleaf, noting any modifications.}}

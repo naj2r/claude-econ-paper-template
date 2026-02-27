@@ -1,0 +1,25 @@
+# Discussion & Conclusion Draft
+
+Draft workspace for the discussion and conclusion sections. Claude writes detailed notes here; the user condenses into Overleaf.
+
+## Key Contributions
+
+1. {{Contribution 1}}
+2. {{Contribution 2}}
+3. {{Contribution 3}}
+
+## Limitations
+
+{{Honest assessment of identification threats, data limitations, external validity.}}
+
+## Policy Implications
+
+{{If applicable — what does this mean for practitioners or policymakers?}}
+
+## Future Research
+
+{{What questions does this paper open? What data would help?}}
+
+## Conclusion Draft Notes
+
+{{Core argument in 3-4 sentences. What should the reader take away?}}

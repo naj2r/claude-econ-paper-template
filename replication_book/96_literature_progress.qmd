@@ -1,0 +1,27 @@
+# Literature Progress Tracker
+
+This chapter tracks the status of all papers read, filtered, and synthesized for the literature review.
+
+## Reading Queue
+
+| Paper | Status | Notes File | Relevance | Date Read |
+|-------|--------|-----------|-----------|-----------|
+| {{Author (Year)}} | Unread / Read / Filtered / Synthesized | `articles/{{filename}}_notes.md` | High / Medium / Low | {{date}} |
+
+## Filter Results
+
+After running `/lit-filter`:
+
+| Paper | Inclusion Value | Redundancy Flag | Verdict |
+|-------|----------------|-----------------|---------|
+| {{Author (Year)}} | {{score}} | {{duplicate of X?}} | Keep / Cut / Merge |
+
+## Synthesis Status
+
+| Subtopic | Papers Included | Word Count | Status |
+|----------|----------------|------------|--------|
+| {{subtopic 1}} | {{N}} | {{words}} | Draft / Final |
+
+## Notes
+
+{{Track decisions about what to include/exclude and why.}}

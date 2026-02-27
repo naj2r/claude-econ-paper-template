@@ -1,0 +1,21 @@
+# Results Section Draft
+
+Draft workspace for the results section of the paper. Claude writes detailed interpretation here; the user condenses into Overleaf.
+
+## Main Results
+
+{{Describe headline findings from primary specification.}}
+
+## Robustness
+
+{{Alternative specifications, sensitivity checks, placebo tests.}}
+
+## Heterogeneity
+
+{{Subgroup analysis, interaction effects, distributional results.}}
+
+## Tables and Figures
+
+| Table/Figure | File | Description | Status |
+|-------------|------|-------------|--------|
+| Table 1 | `files/tab/{{filename}}.tex` | {{description}} | {{status}} |

@@ -1,0 +1,21 @@
+# Outcome Variable Construction
+
+## Overview
+
+This chapter documents how outcome (dependent) variables are constructed from the merged panel.
+
+## Outcomes
+
+| Variable | Label | Construction | Source Column(s) |
+|----------|-------|-------------|-----------------|
+| `{{y1}}` | {{description}} | {{formula or logic}} | {{raw columns}} |
+
+## Transformations
+
+{{Document any log transforms, per-capita scaling, winsorization, or normalization.}}
+
+## Missing Data
+
+| Variable | Missing N | Missing % | Treatment |
+|----------|----------|----------|-----------|
+| `{{y1}}` | {{N}} | {{%}} | {{drop / impute / flag}} |

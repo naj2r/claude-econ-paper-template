@@ -1,0 +1,35 @@
+# Merge & Master Panel
+
+## Overview
+
+This chapter documents how individual data sources (Chapters 10–30) are merged into the master analysis panel.
+
+## Build Script
+
+```
+code/{{04_merge.do or .R}}
+```
+
+## Merge Diagram
+
+```
+Source A (ch.10) ──┐
+                   ├── merge on {{key}} ──→ master_panel.dta
+Source B (ch.20) ──┤
+Source C (ch.30) ──┘
+```
+
+## Merge Results
+
+| Left | Right | Key | Match Rate | Unmatched Action |
+|------|-------|-----|-----------|-----------------|
+| {{source A}} | {{source B}} | {{key}} | {{%}} | {{drop / impute / flag}} |
+
+## Final Panel Structure
+
+| Dimension | Description |
+|-----------|-------------|
+| Unit | {{county / firm / individual}} |
+| Time | {{year / quarter / month}} |
+| Observations | {{N}} |
+| Time range | {{start}}–{{end}} |

@@ -1,0 +1,24 @@
+# Controls & Scaling
+
+## Overview
+
+This chapter documents control variable construction, population scaling, and any variable transformations applied before estimation.
+
+## Control Variables
+
+| Variable | Label | Source | Notes |
+|----------|-------|--------|-------|
+| `{{x1}}` | {{description}} | {{source}} | {{any construction notes}} |
+
+## Scaling
+
+| Variable | Raw Unit | Scaled Unit | Scaling Factor |
+|----------|----------|-------------|----------------|
+| `{{y1}}` | {{raw}} | {{scaled}} | {{per 10k, per 100k, etc.}} |
+
+## Fixed Effects
+
+| FE | Variable | Levels |
+|----|----------|--------|
+| {{Unit FE}} | `{{county_fe}}` | {{N}} |
+| {{Time FE}} | `{{year_fe}}` | {{N}} |

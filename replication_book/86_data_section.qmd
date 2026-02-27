@@ -1,0 +1,21 @@
+# Data Section Draft
+
+Draft workspace for the data description section of the paper. Claude writes detailed notes here; the user condenses into Overleaf.
+
+## Data Sources
+
+| Source | Description | Years | Unit | Key Variables |
+|--------|-------------|-------|------|---------------|
+| {{source 1}} | {{description}} | {{years}} | {{unit}} | {{variables}} |
+
+## Sample Construction
+
+{{Describe inclusion/exclusion criteria, merges, and final sample size.}}
+
+## Summary Statistics
+
+{{Include or reference summary statistics tables.}}
+
+## Measurement Notes
+
+{{Document any measurement issues, proxy variables, or data limitations.}}

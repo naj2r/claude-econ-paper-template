@@ -1,0 +1,23 @@
+# Secondary Data Build
+
+## Overview
+
+This chapter documents an additional data source beyond the primary build in Chapter 10. Add one chapter per major data source (e.g., 20_ for source B, 30_ for source C, 40_ for the merge).
+
+**Naming convention:** `20_descriptive_name.qmd`, `30_descriptive_name.qmd`, etc.
+
+## Build Script
+
+```
+code/{{02_secondary_build.do or .R}}
+```
+
+## Input → Output
+
+| Input | Output | Transformation |
+|-------|--------|----------------|
+| `data_raw/{{source}}` | `data_final/{{intermediate}}` | {{description}} |
+
+## Notes
+
+{{Document any quirks, exclusions, or decisions made during this build.}}

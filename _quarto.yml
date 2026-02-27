@@ -13,11 +13,14 @@ book:
     - part: "Data Construction"
       chapters:
         - replication_book/10_data_build.qmd
-        # Add more data build chapters as needed (20_, 30_, 40_)
+        - replication_book/20_secondary_data_build.qmd
+        # Add more source-specific chapters as needed (30_source_c.qmd, etc.)
+        - replication_book/40_merge_master_panel.qmd
     - part: "Variable Construction"
       chapters:
         - replication_book/50_variable_definitions.qmd
-        # Add more variable chapters as needed (60_, 70_)
+        - replication_book/60_outcome_construction.qmd
+        - replication_book/70_controls_and_scaling.qmd
     - part: "Analysis"
       chapters:
         - replication_book/75_empirical_strategy.qmd
@@ -26,10 +29,11 @@ book:
     - part: "Paper Development"
       chapters:
         - replication_book/85_literature_sources.qmd
-        # Uncomment as sections are drafted:
-        # - replication_book/86_data_section.qmd
-        # - replication_book/87_results_section.qmd
-        # - replication_book/88_discussion_conclusion.qmd
+        - replication_book/86_data_section.qmd
+        - replication_book/86_prose_revisions.qmd
+        - replication_book/87_results_section.qmd
+        - replication_book/88_discussion_conclusion.qmd
+        - replication_book/96_literature_progress.qmd
     - part: "Backmatter — Audit Trail"
       chapters:
         - replication_book/91_change_log.qmd
