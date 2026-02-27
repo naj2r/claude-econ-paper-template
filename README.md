@@ -82,14 +82,121 @@ cd $RB && quarto render
 claude  # Start Claude Code in your project directory
 ```
 
+---
+
+## Sessions, Context, and Portability
+
+Claude Code has no built-in memory between sessions. Every time you run `claude`, it starts fresh and reconstructs context by reading files — primarily `CLAUDE.md`. Understanding this is key to working effectively.
+
+### How Claude "Remembers"
+
+| File | What It Preserves | Read Automatically? |
+|------|-------------------|---------------------|
+| `CLAUDE.md` | Project config, paths, agent/skill inventory, current state | **Yes** — every session |
+| `MEMORY.md` | `[LEARN]` entries — corrections, discovered patterns, things Claude got wrong | **Yes** — every session |
+| `.claude/rules/*.md` | Conventions, quality gates, study parameters | **Yes** — loaded by path scope |
+| `quality_reports/plans/` | Saved plans from plan-first workflow | On demand (read at session start per plan-first rule) |
+| `quality_reports/session_logs/` | What happened in each session | On demand (read at session start per plan-first rule) |
+| Backmatter chapters (91–95) | Reviewer-facing audit trail: changes, decisions, problems, verification | On demand |
+
+The **Current State** table in `CLAUDE.md` is the single most important thing to keep updated. It tells Claude what's done, what's in progress, and what needs work — without re-reading every file.
+
+### Scenario A: New Session, Same Project
+
+You hit a context limit, or you closed the terminal and came back tomorrow. The project files haven't moved.
+
+```bash
+# Just run claude from the same directory. That's it.
+cd /path/to/my-paper
+claude
+```
+
+**What happens automatically:**
+1. Claude reads `CLAUDE.md` → knows the project, paths, agents, skills, current state
+2. Claude reads `MEMORY.md` → knows past corrections and patterns
+3. Rules load by path scope as you work on files
+4. The plan-first-workflow rule tells Claude to check the most recent plan and session log
+
+**What you should do before ending a session** (if you want clean handoff):
+1. Update the **Current State** table in `CLAUDE.md` if anything major changed
+2. Make sure there's a session log in `quality_reports/session_logs/`
+3. Any `[LEARN]` entries should be in `MEMORY.md`
+
+**Quick context recovery prompt** (optional — paste if Claude seems lost):
+
+> Read the most recent session log in `quality_reports/session_logs/` and the current state table in CLAUDE.md. Summarize where we left off and what's next.
+
+### Scenario B: New Project from the Template
+
+You're starting a different paper — new data, new question, separate repo entirely.
+
+**Step 1: Create the repo**
+
+```bash
+# Option A: GitHub CLI (recommended)
+gh repo create my-new-paper --template naj2r/claude-econ-paper-template --private
+git clone https://github.com/YOUR_USERNAME/my-new-paper
+cd my-new-paper
+
+# Option B: GitHub web UI
+# Click "Use this template" on the repo page, then clone
+```
+
+**Step 2: Open Claude Code and paste one prompt**
+
+```bash
+claude
+```
+
+Then paste:
+
+> I am starting to work on **[PAPER TITLE]** in this repo. **[2-3 sentences: topic, data, methods, target journal.]**
+>
+> The Claude Code economics paper template is set up. Please read CLAUDE.md and all configuration files, then update them for my project — fill in all `{{placeholders}}`, customize study-parameters.md with my treatment variables and panel structure, and set up the Overleaf path.
+>
+> Enter plan mode and start by adapting the configuration for this project.
+
+**Step 3: Claude customizes 5 files** (everything else works immediately):
+
+| File | What to fill in |
+|------|----------------|
+| `CLAUDE.md` | Paper title, `$RB` / `$OL` / `$PAPERS` paths, current state |
+| `.claude/rules/study-parameters.md` | Treatment variables, headline results, panel definitions, sample structure |
+| `.claude/rules/replication-protocol.md` | Your do-file or script pipeline |
+| `.claude/rules/overleaf-workflow.md` | Section writing status tracker |
+| `.claude/agents/domain-reviewer.md` | Study context for the domain expert reviewer |
+
+All 26 agents, 34 skills, and 13 rules reference these config files via variables (`$OL`, `$RB`, `study-parameters.md`) rather than hardcoded paths — so they work for any project without modification.
+
+### Quick Reference: Which Scenario Am I In?
+
+| Situation | What to do |
+|-----------|-----------|
+| Closed terminal, same paper | `cd /path/to/paper && claude` — everything auto-loads |
+| Hit context limit mid-task | Same as above; paste the context recovery prompt if needed |
+| Starting a brand new paper | Create repo from template → paste setup prompt → customize 5 files |
+| Working on two papers simultaneously | Each paper is its own repo with its own `CLAUDE.md` — open separate terminals |
+| Want to share infrastructure updates | Pull from the template repo, or manually copy new agents/skills from it |
+
+### The Overleaf Connection
+
+Each project needs its own Overleaf project. The template doesn't create one for you — set it up separately:
+
+1. Create an Overleaf project (from the published template or manually)
+2. Sync it to your machine via Dropbox (Overleaf → Menu → Sync → Dropbox)
+3. Set `$OL` in your `CLAUDE.md` to the local Dropbox path
+4. The table pipeline (`esttab` → `.tex` → `\input{}`) works identically across projects
+
+---
+
 ## Architecture
 
 ```
 Your Paper/
 ├── .claude/                    # AI workflow infrastructure
-│   ├── agents/                 # 16 reviewer agents
-│   ├── skills/                 # 22 invocable skills
-│   └── rules/                  # 12 convention files
+│   ├── agents/                 # 26 reviewer agents
+│   ├── skills/                 # 34 invocable skills
+│   └── rules/                  # 13 convention files
 ├── CLAUDE.md                   # Project config (paths, state, principles)
 ├── _quarto.yml                 # Quarto book config (HTML + PDF)
 ├── replication_book/           # Internal documentation chapters
