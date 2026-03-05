@@ -1,5 +1,7 @@
 # Claude Code Economics Paper Template
 
+This is a constant work-in-progress, only possible due to Pedro Sant'Anna and Scott Cunningham's guides that inspired the current (messy) repository setup for claude code. Copy it and strip it for parts. It's useful to me, so you might find it useful too.
+
 A complete workflow template for writing empirical economics papers with [Claude Code](https://claude.ai/claude-code). Includes 28 AI agents, 36 skills, and a two-layer documentation architecture (Quarto internal + Overleaf external).
 
 ## What's Included
