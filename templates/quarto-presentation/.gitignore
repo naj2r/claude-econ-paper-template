@@ -1,0 +1,14 @@
+/.quarto/
+**/*.quarto_ipynb
+
+# Rendered slide outputs (rebuild from QMD)
+presentation-*.html
+presentation-*.pdf
+presentation-*.pptx
+presentation-*.tex
+presentation.html
+presentation.pdf
+presentation.pptx
+presentation.tex
+presentation*_files/
+_output/

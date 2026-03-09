@@ -35,5 +35,19 @@ desktop.ini
 # Dropbox conflict files
 *conflicted*
 
+# Quarto presentation rendered outputs (rebuild from QMD)
+Quarto/conference/presentation*.html
+Quarto/conference/presentation*.pdf
+Quarto/conference/presentation*.pptx
+Quarto/conference/presentation*.tex
+Quarto/conference/presentation*_files/
+Quarto/conference/_output/
+Quarto/conference/.quarto/
+
+# Claude Code local files
+.claude/settings.local.json
+.claude/state/
+CLAUDE.local.md
+
 # Session temp files
 quality_reports/session_logs/.last_log_timestamp

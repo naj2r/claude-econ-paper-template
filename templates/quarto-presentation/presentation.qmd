@@ -1,0 +1,157 @@
+---
+title: "{{Paper Title}}"
+subtitle: "{{Subtitle}}"
+author: "{{Author Name(s)}}"
+institute: "{{Institution}}"
+date: "{{Year}}"
+filters:
+  - filters/custom-boxes.lua
+format:
+  # ── RevealJS (HTML slides) ──────────────────────────────────
+  revealjs:
+    theme: [default, styles/revealjs-theme.scss]
+    width: 1280
+    height: 720
+    margin: 0.1
+    center: false
+    transition: none
+    slide-number: true
+    show-slide-number: all
+    hash: true
+    hash-type: number
+    history: true
+    keyboard: true
+    overview: true
+    touch: true
+    auto-stretch: true
+    smaller: false
+    scrollable: false
+    controls: true
+    controls-layout: bottom-right
+    progress: true
+    menu: false
+    chalkboard: false
+    footer: "{{Author}} | {{Institution}}"
+    title-slide-attributes:
+      data-background-color: "{{#HEX_PRIMARY}}"
+  # ── Beamer (LaTeX/PDF slides) ───────────────────────────────
+  beamer:
+    theme: default
+    colortheme: default
+    aspectratio: 169
+    fontsize: 11pt
+    include-in-header: styles/beamer-preamble.tex
+    cite-method: natbib
+    natbiboptions: "round,authoryear"
+    bibliographystyle: plainnat
+    fig-width: 10
+    fig-height: 6
+    pdf-engine: lualatex
+    keep-tex: true
+---
+
+
+## {{Motivating Question or Finding}} {.smaller}
+
+- First bullet: context and prior work
+- Second bullet: the gap or puzzle
+- Third bullet: what remains unmeasured
+
+::: {.keybox}
+**Research gap:** {{One-sentence statement of what's missing in the literature}}
+:::
+
+::: {.notes}
+Speaker notes go here. Target: 60 seconds.
+:::
+
+
+## Preview: {{One-Sentence Summary of Main Result}}
+
+::: {.resultbox}
+- **Question:** {{Research question}}
+- **Finding 1:** {{Key estimate with p-value}}
+- **Finding 2:** {{Secondary finding}}
+:::
+
+- **Interpretation:** {{Brief theoretical interpretation}}
+
+::: {.notes}
+Hit the key numbers. Target: 45 seconds.
+:::
+
+
+## {{Data Description Slide Title}}
+
+- **Source 1:** {{Primary data source and coverage}}
+- **Source 2:** {{Secondary data source}}
+- **Source 3:** {{Controls or population data}}
+
+::: {.softbox}
+{{Panel description: N observations, treatment prevalence, key sample features}}
+:::
+
+
+## {{Empirical Strategy Slide Title}}
+
+::: {.eqbox}
+$$Y_{it} = \beta \cdot \text{Treatment}_{it} + \gamma_i + \delta_t + \varepsilon_{it}$$
+:::
+
+- {{FE description}}: absorb {{what they absorb}}
+- SEs clustered at {{level}} ({{N clusters}})
+
+::: {.highlightbox}
+{{Key identification assumption or design feature}}
+:::
+
+
+## {{Main Result Slide Title}} {#main-results}
+
+::: {.resultbox}
+|                    | {{Outcome 1}}    | {{Outcome 2}}    |
+|--------------------|:----------------:|:----------------:|
+| {{Treatment}}      | {{estimate}}     | {{estimate}}     |
+|                    | ({{SE}})         | ({{SE}})         |
+| Dep. var. mean     | {{mean}}         | {{mean}}         |
+| *N*                | {{N}}            | {{N}}            |
+:::
+
+- {{Interpretation of key finding}}
+
+[Full Table →](#full-table1){.footnote}
+
+
+## {{Conclusion Slide Title}}
+
+- {{Contribution 1}}
+- {{Contribution 2}}
+- {{Contribution 3}}
+
+::: {.keybox}
+**{{Bottom-line takeaway in one sentence}}**
+:::
+
+::: {.notes}
+Deliver slowly. Let it land. Say thank you. Target: 45 seconds.
+:::
+
+
+# Backup Slides
+
+
+## Appendix Contents {.smaller}
+
+- [B1: {{Backup Slide 1 Title}}](#backup-1)
+- [B2: {{Backup Slide 2 Title}}](#backup-2)
+- [B3: {{Backup Slide 3 Title}}](#backup-3)
+
+
+## {{Backup Slide 1 Title}} {#backup-1 .smallest}
+
+{{Content for backup slide — detailed results, robustness, mechanism}}
+
+[← Back to results](#main-results)
+
+
+## References {.smallest}

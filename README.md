@@ -2,7 +2,7 @@
 
 This is a constant work-in-progress, only possible due to Pedro Sant'Anna and Scott Cunningham's guides that inspired the current (messy) repository setup for claude code. Copy it and strip it for parts. It's useful to me, so you might find it useful too.
 
-A complete workflow template for writing empirical economics papers with [Claude Code](https://claude.ai/claude-code). Includes 28 AI agents, 36 skills, and a two-layer documentation architecture (Quarto internal + Overleaf external).
+A complete workflow template for writing empirical economics papers with [Claude Code](https://claude.ai/claude-code). Includes 38 AI agents, 37 skills, 2 hooks, and a two-layer documentation architecture (Quarto internal + Overleaf external).
 
 ## What's Included
 
@@ -10,9 +10,10 @@ A complete workflow template for writing empirical economics papers with [Claude
 
 | Component | Count | Purpose |
 |-----------|-------|---------|
-| **Agents** | 28 | Narrow-scope reviewers + 2 background automation agents (stenographer, codevolution) |
-| **Skills** | 36 | Invocable workflows: `/render-pdf`, `/review-paper`, `/mccloskey-prose-edit`, `/consolidate`, etc. |
-| **Rules** | 15 | Conventions: code style, quality gates, model assignment, manuscript protection, replication protocol |
+| **Agents** | 38 | Narrow-scope reviewers + 5 cheap-scan1 pipeline agents + 2 background automation agents (stenographer, codevolution) + 4 section writing review agents (lit-review + generic) |
+| **Skills** | 37 | Invocable workflows: `/render-pdf`, `/review-paper`, `/mccloskey-prose-edit`, `/consolidate`, `/cheap-scan1`, `/lit-organizer`, `/section-writing-review`, etc. |
+| **Rules** | 19 | Conventions: code style, quality gates, model assignment, manuscript protection, replication protocol, compression triad, autonomous work queue, Quarto presentation pipeline |
+| **Hooks** | 2 | Event-driven: manuscript protection (PreToolUse), context recovery (SessionStart) |
 
 ### Quarto Replication Book (`replication_book/`)
 
@@ -37,6 +38,32 @@ The Overleaf project provides:
 - `presentation.tex` Beamer template
 - Table pipeline: `files/tab/` for Stata `esttab` output
 - Figure pipeline: `files/fig/` for R/Stata graphics
+
+### Conference Presentations (Quarto Multi-Format)
+
+Two approaches for conference slides:
+
+| Approach | Source | Outputs | When to use |
+|----------|--------|---------|-------------|
+| **Option A: Pure Beamer** | `$OL/presentation.tex` | PDF only | Full LaTeX control, Overleaf compilation |
+| **Option B: Quarto multi-format** | `Quarto/conference/*.qmd` | RevealJS HTML + Beamer PDF | Web-accessible slides + PDF handout from one source |
+
+Option B uses a starter kit in `templates/quarto-presentation/` with:
+- `presentation.qmd` — template QMD with `{{placeholders}}` for title, author, colors
+- `styles/beamer-preamble.tex` — Beamer theme with TikZ box environments
+- `styles/revealjs-theme.scss` — RevealJS theme with matching CSS box classes
+- `filters/custom-boxes.lua` — Lua filter converting div classes to LaTeX environments
+- `_quarto.yml` — shared settings only (bibliography, CSL, mermaid, execute)
+
+**Quick start:**
+```bash
+cp -r templates/quarto-presentation/ Quarto/conference/
+# Edit presentation.qmd — fill in {{placeholders}}
+quarto render presentation.qmd --to revealjs   # HTML slides
+quarto render presentation.qmd --to beamer      # PDF slides
+```
+
+See `.claude/rules/quarto-presentation-pipeline.md` for the full reference (config inheritance, Mermaid constraints, format-conditional content, two-deck architecture).
 
 ## Setup Instructions
 
@@ -168,7 +195,7 @@ Then paste:
 | `.claude/rules/overleaf-workflow.md` | Section writing status tracker |
 | `.claude/agents/domain-reviewer.md` | Study context for the domain expert reviewer |
 
-All 28 agents, 36 skills, and 15 rules reference these config files via variables (`$OL`, `$RB`, `study-parameters.md`) rather than hardcoded paths — so they work for any project without modification.
+All 36 agents, 36 skills, and 18 rules reference these config files via variables (`$OL`, `$RB`, `study-parameters.md`) rather than hardcoded paths — so they work for any project without modification.
 
 ### Quick Reference: Which Scenario Am I In?
 
@@ -196,9 +223,9 @@ Each project needs its own Overleaf project. The template doesn't create one for
 ```
 Your Paper/
 ├── .claude/                    # AI workflow infrastructure
-│   ├── agents/                 # 28 agents (26 reviewers + 2 background automation)
+│   ├── agents/                 # 36 agents (29 reviewers + 5 cheap-scan1 pipeline + 2 background automation)
 │   ├── skills/                 # 36 invocable skills
-│   └── rules/                  # 15 convention files
+│   └── rules/                  # 18 convention files
 ├── CLAUDE.md                   # Project config (paths, state, principles)
 ├── _quarto.yml                 # Quarto book config (HTML + PDF)
 ├── replication_book/           # Internal documentation chapters
@@ -206,6 +233,9 @@ Your Paper/
 ├── data_raw/ → data_final/     # Data pipeline
 ├── output/results/             # Regression CSV
 ├── quality_reports/            # Plans, session logs, specs
+├── templates/
+│   └── quarto-presentation/    # Starter kit: QMD + SCSS + Beamer preamble + Lua filter
+├── Quarto/conference/          # Your presentation (copy from template, customize)
 └── Overleaf/ (separate)        # Paper + slides (synced via Dropbox)
 ```
 
@@ -242,9 +272,17 @@ These skills form a complete writing pipeline for taking a rough draft to public
 
 | Skill | What it does | When to use |
 |-------|-------------|-------------|
-| `/split-pdf` | Download, split PDFs into 4-page chunks, deep-read with structured extraction | Reading any academic paper |
-| `/lit-filter` | Organize, critique inclusion value, filter redundancy across all paper notes | After all papers are read |
-| `/lit-synthesizer` | Rate papers by relevance, organize by subtopic, condense into narrative review | Building the lit review section |
+| `/split-pdf` | Download, split PDFs into 4-page chunks, deep-read with structured extraction | Reading any academic paper (baseline) |
+| `/cheap-scan1` | Token-efficient PDF pipeline: local text extraction + routed specialists. ~55-76% cheaper than split-pdf | Reading papers when token cost matters; falls back to split-pdf for scanned PDFs |
+| `/lit-organizer` | Single-pass pipeline: score relevance (1-5), assign inclusion tiers (A-D), identify redundancy clusters, write synthesized narrative by subtopic. Replaces the old lit-filter + lit-synthesizer two-step. | After all papers are read |
+
+### Conference Presentations
+
+| Skill | What it does | When to use |
+|-------|-------------|-------------|
+| `/build-slides` | Build slides — auto-detects Beamer-only (Option A) or Quarto multi-format (Option B). For Quarto: renders RevealJS + Beamer from QMD | After editing slide content |
+| `/visual-audit` | Adversarial layout audit — checks overflow, font sizes, box fatigue. Supports both Beamer and Quarto (Mermaid, format-conditional, cross-format) | Before presenting or committing slides |
+| `/slide-excellence` | Multi-agent review (visual + pedagogy + proofreading) | Comprehensive quality check before milestones |
 
 ### Manuscript Protection
 
@@ -252,7 +290,7 @@ These skills form a complete writing pipeline for taking a rough draft to public
 |-------|-------------|-------------|
 | `/own-writing-check` | Audit `.tex` changes — flag any edit the user didn't explicitly request | After any session touching Overleaf files |
 
-## All Agents (28)
+## All Agents (36)
 
 ### Review Agents (READ-ONLY critics)
 
@@ -260,8 +298,10 @@ These skills form a complete writing pipeline for taking a rough draft to public
 |-------|-------|---------------|
 | `domain-reviewer` | opus | Economic interpretation, identification, overclaiming |
 | `narrative-reviewer` | sonnet | Argumentative flow, transitions, "so what" clarity |
+| `narrative-factcheck` | sonnet | Draft claims against user's persistent corrections memory (95/100 threshold) |
+| `lit-review-inquisitor` | haiku→sonnet | Lit review structural compliance (foible scoring, escalates R1→R2) |
 | `proofreader` | sonnet | Grammar, register, citation format, capitalization |
-| `slide-auditor` | sonnet | Beamer layout, overflow, font consistency |
+| `slide-auditor` | sonnet | Beamer + Quarto layout, overflow, font consistency, Mermaid constraints |
 | `r-reviewer` | sonnet | R code quality, reproducibility |
 | `stata-reviewer` | sonnet | Stata code conventions, clustering, file naming |
 | `table-auditor` | sonnet | Table formatting, number verification against CSV |
@@ -274,8 +314,6 @@ These skills form a complete writing pipeline for taking a rough draft to public
 | `mccloskey-critic` | sonnet | McCloskey prose quality scoring (100-point rubric) |
 | `compressor-critic` | sonnet | Section word count compliance |
 | `consolidator-critic` | sonnet | Skeptical gatekeeper for proposed additions |
-| `lit-filter` | sonnet | Paper inclusion value, redundancy filtering |
-| `lit-synthesizer` | sonnet | Literature rating, subtopic organization |
 
 ### Fixer Agents (READ-WRITE, cannot self-approve)
 
@@ -285,10 +323,23 @@ These skills form a complete writing pipeline for taking a rough draft to public
 | `bib-fixer` | sonnet | Applies bib-checker findings |
 | `pdf-fixer` | sonnet | Applies pdf-auditor findings |
 | `mccloskey-fixer` | sonnet | Generates prose revision suggestions |
+| `narrative-factcheck-fixer` | sonnet | Applies narrative accuracy corrections (per corrections memory) |
+| `lit-review-clarifier` | sonnet→opus | Proposes structural revisions for lit review foibles, escalates R1→R2 |
 | `compressor-fixer` | sonnet | Compresses prose to meet word count targets |
 | `organizer` | sonnet | Reorders paragraphs, fixes section boundaries |
 | `consolidator-fixer` | opus | Cherry-picks additions from source documents |
 | `verifier` | sonnet | End-to-end task completion verification |
+
+### Pipeline Agents (cheap-scan1 PDF processing + literature organization)
+
+| Agent | Model | What it does |
+|-------|-------|-------------|
+| `pdf-scanner` | haiku | Classifies extracted PDF pages by content type (text/table/figure/equation/reference) — produces routing manifest |
+| `pdf-text-summarizer` | haiku | Deep-reads per-section markdown files, produces structured notes for prose sections |
+| `pdf-visual-analyzer` | sonnet | Extracts table data and figure descriptions from rendered PNG pages (vision required) |
+| `pdf-equation-transcriber` | sonnet | Transcribes mathematical equations to LaTeX from rendered PNG pages (vision required) |
+| `pdf-consolidator` | sonnet | Merges all specialist outputs into two-layer notes.md (8 main sections + 5 appendices) compatible with `/lit-organizer` |
+| `literature-organizer` | sonnet | Single-pass: scores relevance (1-5), assigns inclusion tiers (A-D), identifies redundancy clusters, writes synthesized narrative by subtopic |
 
 ### Background Automation Agents (fire autonomously)
 
@@ -306,6 +357,48 @@ These skills form a complete writing pipeline for taking a rough draft to public
 | **Haiku** | File search, citation lookup, session logging, stenographer | $ |
 
 See `.claude/rules/model-assignment.md` for the full decision matrix.
+
+## Hooks (2)
+
+Event-driven handlers in `.claude/hooks/` that enforce rules mechanically.
+
+| Hook | Event | What it does |
+|------|-------|-------------|
+| `manuscript_protection.py` | `PreToolUse` (Edit\|Write) | Blocks edits to protected .tex files (Sections/1-6, presentation.tex). Warn-once-then-allow per session. Defense-in-depth for `manuscript-protection.md` rule. |
+| `context_recovery.py` | `SessionStart` | Outputs most recent plan + session log filenames as system message. Helps Claude orient after context compression or session resume. |
+
+Hooks are configured in `.claude/settings.json` under the `hooks` key. Add the following to your project settings:
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .claude/hooks/manuscript_protection.py",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .claude/hooks/context_recovery.py",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}
+```
 
 ## Extending the Template
 

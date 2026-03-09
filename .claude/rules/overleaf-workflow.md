@@ -9,13 +9,25 @@ Applies when working on any file in the Overleaf directory or writing paper cont
 | **Quarto book** | Internal: full methodology, code, documentation | `$RB/replication_book/*.qmd` |
 | **Overleaf paper** | External: paper draft for distribution | `$OL/main.tex` + `Sections/` |
 | **Overleaf slides** | External: Beamer presentation | `$OL/presentation.tex` |
+| **Quarto slides** | Alternative: multi-format slides (RevealJS + Beamer) | `Quarto/conference/*.qmd` |
+
+## Slide Workflows (Choose One)
+
+| Approach | Source | Outputs | When to Use |
+|----------|--------|---------|-------------|
+| **Option A: Pure Beamer** | `$OL/presentation.tex` | PDF only | Full LaTeX control, Overleaf-only |
+| **Option B: Quarto multi-format** | `Quarto/conference/*.qmd` | RevealJS HTML + Beamer PDF | Web + PDF from one source |
+
+Option B details: see `.claude/rules/quarto-presentation-pipeline.md`
+Template: `templates/quarto-presentation/`
 
 ## Content Flow
 ```
-Quarto (detailed internals)  →  proofread & condense  →  Overleaf Sections/ (paper)
-                                                     →  presentation.tex (slides)
-Stata esttab  →  files/tab/{{subfolder}}/*.tex  →  \input{} in paper + slides
-bibliography.bib  ←  single source for both paper + Quarto
+Quarto book (detailed internals) → proofread & condense → Overleaf Sections/ (paper)
+                                                        → presentation.tex (slides, Option A)
+                                                        → Quarto/conference/*.qmd (slides, Option B)
+Stata esttab → files/tab/{{subfolder}}/*.tex → \input{} in paper + slides
+bibliography.bib ← single source for paper + Quarto book + slides
 ```
 
 ## Table Pipeline (Stata → Overleaf)

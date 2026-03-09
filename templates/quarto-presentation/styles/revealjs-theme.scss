@@ -1,0 +1,302 @@
+/*-- scss:defaults --*/
+
+// ============================================================
+// RevealJS Theme: Conference Presentation Template
+// Matches box environments in beamer-preamble.tex
+// Customize colors to match your institution's brand
+// ============================================================
+
+// --- Color Palette (CUSTOMIZE THESE) ---
+$primary-color: #CC0000;       // Main accent
+$dark-gray: #333333;
+$med-gray: #666666;
+$light-gray: #F0F0F0;
+$soft-gray: #F5F5F5;
+$positive-green: #2E7D32;
+$alert-red: #8B0000;
+$white: #FFFFFF;
+
+// --- RevealJS Variables ---
+$body-bg: $white;
+$body-color: rgba(0, 0, 0, 0.85);
+$link-color: $primary-color;
+$link-color-hover: lighten($primary-color, 15%);
+$presentation-heading-color: $dark-gray;
+$presentation-heading-font-weight: 700;
+$code-block-bg: $soft-gray;
+$code-block-border-color: darken($soft-gray, 10%);
+
+/*-- scss:rules --*/
+
+// ============================================================
+// TITLE SLIDE
+// ============================================================
+
+#title-slide {
+  text-align: left;
+  padding-left: 5%;
+
+  h1.title {
+    color: $white;
+    font-size: 1.6em;
+    font-weight: 700;
+    margin-bottom: 0.2em;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  }
+
+  p.subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1em;
+    font-style: italic;
+    margin-bottom: 1em;
+  }
+
+  p.author {
+    color: $white;
+    font-size: 1.0em;
+    font-weight: 600;
+    margin-bottom: 0.1em;
+  }
+
+  p.institute {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.85em;
+    font-weight: 400;
+  }
+
+  p.date {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8em;
+  }
+}
+
+// ============================================================
+// FRAME TITLES
+// ============================================================
+
+.reveal h2 {
+  color: $dark-gray;
+  font-size: 1.25em;
+  font-weight: 700;
+  border-bottom: 2.5px solid $dark-gray;
+  padding-bottom: 0.15em;
+  margin-bottom: 0.5em;
+}
+
+// Section headers (h1)
+.reveal h1 {
+  color: $primary-color;
+  font-size: 1.8em;
+  text-align: center;
+}
+
+// ============================================================
+// BOX ENVIRONMENTS (match beamer-preamble.tex)
+// ============================================================
+
+// keybox — key findings / takeaways
+.keybox {
+  background: rgba($primary-color, 0.06);
+  border: 1.5px solid rgba($primary-color, 0.5);
+  border-radius: 6px;
+  padding: 0.8em 1em;
+  margin: 0.6em 0;
+  font-size: 0.88em;
+
+  &::before {
+    content: "Key Point";
+    display: block;
+    font-weight: 700;
+    color: rgba($primary-color, 0.7);
+    font-size: 0.8em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3em;
+  }
+}
+
+// resultbox — empirical results
+.resultbox {
+  background: rgba($dark-gray, 0.05);
+  border: 1.5px solid rgba($dark-gray, 0.4);
+  border-radius: 6px;
+  padding: 0.8em 1em;
+  margin: 0.6em 0;
+  font-size: 0.88em;
+
+  &::before {
+    content: "Result";
+    display: block;
+    font-weight: 700;
+    color: rgba($dark-gray, 0.6);
+    font-size: 0.8em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3em;
+  }
+
+  table {
+    font-size: 0.85em;
+    margin: 0.4em 0;
+  }
+}
+
+// methodbox — methodology descriptions
+.methodbox {
+  background: rgba($med-gray, 0.06);
+  border: 1.5px solid rgba($med-gray, 0.4);
+  border-radius: 6px;
+  padding: 0.8em 1em;
+  margin: 0.6em 0;
+  font-size: 0.85em;
+
+  &::before {
+    content: "Method";
+    display: block;
+    font-weight: 700;
+    color: rgba($med-gray, 0.7);
+    font-size: 0.8em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3em;
+  }
+}
+
+// highlightbox — highlighted callouts
+.highlightbox {
+  background: rgba($primary-color, 0.04);
+  border-left: 4px solid rgba($primary-color, 0.5);
+  border-radius: 0 6px 6px 0;
+  padding: 0.7em 1em;
+  margin: 0.6em 0;
+  font-size: 0.88em;
+}
+
+// assumptionbox — assumptions / predictions
+.assumptionbox {
+  background: rgba($dark-gray, 0.03);
+  border: 2px solid $dark-gray;
+  border-radius: 6px;
+  padding: 0.8em 1em;
+  margin: 0.6em 0;
+  font-size: 0.88em;
+}
+
+// eqbox — equation display
+.eqbox {
+  background: $soft-gray;
+  border-radius: 6px;
+  padding: 1em;
+  margin: 0.8em auto;
+  text-align: center;
+  max-width: 90%;
+}
+
+// softbox — soft callout
+.softbox {
+  background: $soft-gray;
+  border-radius: 6px;
+  padding: 0.7em 1em;
+  margin: 0.6em 0;
+  font-style: italic;
+  font-size: 0.85em;
+  color: rgba(0, 0, 0, 0.75);
+}
+
+// quotebox — block quotes
+.quotebox {
+  background: $soft-gray;
+  border-left: 4px solid rgba($dark-gray, 0.4);
+  border-radius: 0 6px 6px 0;
+  padding: 0.7em 1em;
+  margin: 0.6em 0;
+  font-style: italic;
+  font-size: 0.88em;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+// ============================================================
+// TABLES & LISTS
+// ============================================================
+
+.reveal table {
+  font-size: 0.78em;
+  border-collapse: collapse;
+  margin: 0.4em 0;
+
+  th {
+    background: $light-gray;
+    font-weight: 700;
+    padding: 0.35em 0.6em;
+    border-bottom: 2px solid $dark-gray;
+  }
+
+  td {
+    padding: 0.3em 0.6em;
+    border-bottom: 1px solid darken($light-gray, 5%);
+  }
+}
+
+.reveal ul, .reveal ol {
+  font-size: 0.92em;
+  line-height: 1.5;
+}
+
+// ============================================================
+// FOOTER & SLIDE NUMBERS
+// ============================================================
+
+.reveal .slide-number {
+  font-size: 0.65em;
+  color: $med-gray;
+}
+
+.reveal .footer {
+  font-size: 0.55em;
+  color: $med-gray;
+}
+
+// ============================================================
+// SPEAKER NOTES
+// ============================================================
+
+.reveal .notes {
+  font-size: 0.85em;
+  color: $med-gray;
+  font-style: italic;
+}
+
+// ============================================================
+// SMALLEST CLASS (for dense backup slides)
+// ============================================================
+
+.smallest {
+  font-size: 0.72em;
+
+  h2 {
+    font-size: 1.1em;
+  }
+}
+
+// ============================================================
+// FOOTNOTE LINKS (back-references to main deck)
+// ============================================================
+
+.footnote {
+  position: absolute;
+  bottom: 3em;
+  right: 2em;
+  font-size: 0.6em;
+  color: $med-gray;
+
+  a {
+    color: $med-gray;
+    text-decoration: none;
+    border-bottom: 1px dotted $med-gray;
+
+    &:hover {
+      color: $primary-color;
+      border-bottom-color: $primary-color;
+    }
+  }
+}

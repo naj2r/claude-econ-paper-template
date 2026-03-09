@@ -1,0 +1,30 @@
+# ============================================================
+# Quarto Project Config — Shared Settings Only
+# ============================================================
+# IMPORTANT: Format-specific settings (revealjs, beamer) go in
+# each QMD's front matter, NOT here. Quarto type:default projects
+# do NOT merge format blocks — QMD overrides this file entirely.
+# ============================================================
+
+project:
+  type: default
+  output-dir: _output
+
+# Render commands:
+#   quarto render presentation.qmd --to revealjs
+#   quarto render presentation.qmd --to beamer
+
+bibliography: references.bib
+csl: chicago-author-date.csl
+
+mermaid:
+  theme: neutral
+
+execute:
+  echo: false
+  warning: false
+  message: false
+
+knitr:
+  opts_chunk:
+    fig.align: center

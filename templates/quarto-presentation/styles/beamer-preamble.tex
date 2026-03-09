@@ -1,0 +1,180 @@
+% ============================================================
+% Beamer Preamble: Conference Theme Template
+% Generated for Quarto multi-format pipeline
+% Environment definitions match CSS classes in revealjs-theme.scss
+% and are invoked by filters/custom-boxes.lua
+% ============================================================
+
+% --- Color Palette (CUSTOMIZE THESE FOR YOUR INSTITUTION) ---
+% Replace with your institution's brand colors
+\definecolor{PrimaryColor}{HTML}{CC0000}    % Main accent (e.g., school red/blue)
+\definecolor{DarkGray}{HTML}{333333}
+\definecolor{MedGray}{HTML}{666666}
+\definecolor{LightGray}{HTML}{F0F0F0}
+\definecolor{SoftGray}{HTML}{F5F5F5}
+\definecolor{PositiveGreen}{HTML}{2E7D32}
+\definecolor{AlertRed}{HTML}{8B0000}
+
+% --- Theme Configuration ---
+\setbeamertemplate{navigation symbols}{}
+\usefonttheme{professionalfonts}
+\setbeamerfont{title}{size=\Large, series=\bfseries}
+\setbeamerfont{frametitle}{size=\large, series=\bfseries}
+\setbeamerfont{footnote}{size=\tiny}
+\setbeamerfont{footline}{size=\tiny}
+
+% --- Beamer Colors ---
+\setbeamercolor{title}{fg=PrimaryColor, bg=white}
+\setbeamercolor{frametitle}{fg=DarkGray, bg=white}
+\setbeamercolor{structure}{fg=PrimaryColor}
+\setbeamercolor{normal text}{fg=black!85}
+\setbeamercolor{alerted text}{fg=PrimaryColor}
+\setbeamercolor{footline}{fg=DarkGray!60, bg=white}
+
+% --- Frame Title with Gray Underline ---
+\setbeamertemplate{frametitle}{%
+  \vskip6pt%
+  \insertframetitle%
+  \par\vskip-4pt%
+  {\color{DarkGray}\rule{\textwidth}{1.5pt}}%
+  \vskip4pt%
+}
+
+% --- Custom Footline (dynamic: reads from QMD metadata) ---
+\setbeamertemplate{footline}{%
+  \usebeamerfont{footline}%
+  \usebeamercolor[fg]{footline}%
+  \hspace{8pt}%
+  \insertshortauthor~|~\insertshortinstitute~|~\insertframenumber/\inserttotalframenumber%
+  \hspace{8pt}\vskip6pt%
+}
+
+% --- TikZ ---
+\usepackage{tikz}
+\usetikzlibrary{shapes, arrows.meta, positioning, calc}
+
+% TikZ-drawn bullet markers
+\setbeamertemplate{itemize item}{%
+  \tikz[baseline=-0.5ex]\fill[PrimaryColor] (0,0) circle (3pt);%
+}
+\setbeamertemplate{itemize subitem}{%
+  \tikz[baseline=-0.5ex]\draw[DarkGray, thick, ->, >=stealth] (0,0) -- (5pt,0);%
+}
+\setbeamertemplate{itemize subsubitem}{%
+  \tikz[baseline=-0.5ex]\fill[MedGray] (0,0) circle (2pt);%
+}
+
+% --- Packages ---
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{amsmath, amssymb}
+
+% --- Emphasis Commands ---
+\newcommand{\emphgold}[1]{{\color{DarkGray}\textbf{#1}}}
+\newcommand{\emphnavy}[1]{{\color{PrimaryColor}\textbf{#1}}}
+\newcommand{\positive}[1]{{\color{PositiveGreen}\textbf{#1}}}
+\newcommand{\negative}[1]{{\color{AlertRed}\textbf{#1}}}
+
+% --- Table sym definition (for Stata/R tables) ---
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+
+% ============================================================
+% BOX ENVIRONMENTS
+% These match the CSS classes in revealjs-theme.scss
+% and are invoked by the Lua filter (filters/custom-boxes.lua)
+% ============================================================
+
+% keybox --- key findings / takeaways
+\newenvironment{keybox}{%
+  \begin{tikzpicture}%
+    \node[draw=PrimaryColor!70, line width=1pt, rounded corners=4pt,%
+          fill=PrimaryColor!8, inner sep=8pt, text width=0.9\textwidth] \bgroup%
+      {\small\color{PrimaryColor!70}\textbf{Key Point}}\par\vskip4pt%
+      \color{black!85}%
+}{%
+    \egroup;%
+  \end{tikzpicture}%
+}
+
+% resultbox --- empirical results (bordered, prominent)
+\newenvironment{resultbox}{%
+  \begin{tikzpicture}%
+    \node[draw=DarkGray!70, line width=1pt, rounded corners=4pt,%
+          fill=DarkGray!8, inner sep=8pt, text width=0.9\textwidth] \bgroup%
+      {\small\color{DarkGray!70}\textbf{Result}}\par\vskip4pt%
+      \color{black!85}%
+}{%
+    \egroup;%
+  \end{tikzpicture}%
+}
+
+% methodbox --- methodology descriptions
+\newenvironment{methodbox}{%
+  \begin{tikzpicture}%
+    \node[draw=MedGray!70, line width=1pt, rounded corners=4pt,%
+          fill=MedGray!8, inner sep=8pt, text width=0.9\textwidth] \bgroup%
+      {\small\color{MedGray!70}\textbf{Method}}\par\vskip4pt%
+      \color{black!85}%
+}{%
+    \egroup;%
+  \end{tikzpicture}%
+}
+
+% highlightbox --- highlighted callouts
+\newenvironment{highlightbox}{%
+  \begin{tikzpicture}%
+    \node[draw=PrimaryColor!50, line width=1pt, rounded corners=4pt,%
+          fill=PrimaryColor!5, inner sep=8pt, text width=0.9\textwidth] \bgroup%
+      \color{black!85}%
+}{%
+    \egroup;%
+  \end{tikzpicture}%
+}
+
+% assumptionbox --- assumptions / predictions (bordered)
+\newenvironment{assumptionbox}{%
+  \begin{tikzpicture}%
+    \node[draw=DarkGray, line width=1.5pt, rounded corners=4pt,%
+          fill=DarkGray!5, inner sep=8pt, text width=0.9\textwidth] \bgroup%
+      \color{black!85}%
+}{%
+    \egroup;%
+  \end{tikzpicture}%
+}
+
+% eqbox --- equation display (minimal styling)
+\newenvironment{eqbox}{%
+  \begin{center}%
+    \begin{tikzpicture}%
+      \node[fill=SoftGray, inner sep=10pt, text width=0.85\textwidth,%
+            align=center] \bgroup%
+}{%
+      \egroup;%
+    \end{tikzpicture}%
+  \end{center}%
+}
+
+% softbox --- soft callout (italic, minimal)
+\newenvironment{softbox}{%
+  \begin{tikzpicture}%
+    \node[fill=SoftGray, inner sep=8pt, text width=0.9\textwidth] \bgroup%
+      \itshape\color{black!85}%
+}{%
+    \egroup;%
+  \end{tikzpicture}%
+}
+
+% quotebox --- block quotes with decorative left border
+\newenvironment{quotebox}{%
+  \begin{tikzpicture}%
+    \node[draw=none, fill=SoftGray, inner sep=8pt,%
+          text width=0.88\textwidth,%
+          append after command={%
+            (\tikzlastnode.north west) edge[line width=3pt, DarkGray!50]%
+            (\tikzlastnode.south west)%
+          }] \bgroup%
+      \itshape\color{black!80}%
+}{%
+    \egroup;%
+  \end{tikzpicture}%
+}
